@@ -28,19 +28,45 @@ class ViewController: UIViewController {
             selector: #selector(keyboardWillBeHidden(notification:)),
             name: UIResponder.keyboardWillHideNotification,
             object: nil)
-    
+        
         
     }
     
-    @IBAction func loginPressed() {
+    
+    func auth() -> Bool {
         let login = loginField.text!
         let password = passwordField.text!
         
-        if login == "admin" && password == "12345" {
-            print("OK")
-        } else {
-            print("ERROR")
+        return login == "admin" && password == "12345"
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier {
+        case "loginSeque":
+            let authResult = auth()
+            
+            if !authResult {
+                showAlertWindows()
+                return false
+            }
+            
+            return authResult
+        default:
+            return true
         }
+        
+    }
+    
+    func showAlertWindows() {
+        // Создаем контроллер
+        let alter = UIAlertController(title: "Ошибка", message: "Введены не верные данные пользователя", preferredStyle: .alert)
+        // Создаем кнопку для UIAlertController
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        // Добавляем кнопку на UIAlertController
+        alter.addAction(action)
+        // Показываем UIAlertController
+        present(alter, animated: true, completion: nil)
+        
     }
     
     @objc func keyboardWasShown(notification: Notification) {
