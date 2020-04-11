@@ -48,8 +48,8 @@
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lo9-Zu-ntf">
-                                        <rect key="frame" x="185" y="301" width="44" height="30"/>
-                                        <state key="normal" title="Войти"/>
+                                        <rect key="frame" x="189.5" y="301" width="35" height="30"/>
+                                        <state key="normal" title="Вход"/>
                                         <connections>
                                             <action selector="loginPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="zez-4Q-E41"/>
                                         </connections>
