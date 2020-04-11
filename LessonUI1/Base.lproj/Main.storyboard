@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="LessonUI1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="dHH-NT-7UZ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Лемурский ВКонтакт" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O5I-tz-xeo">
+                                        <rect key="frame" x="122" y="10" width="170" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Логин" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMA-5T-Fzf">
+                                        <rect key="frame" x="182.5" y="81" width="49" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqc-vD-cS5">
+                                        <rect key="frame" x="177.5" y="186" width="59.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aTO-5F-tGR">
+                                        <rect key="frame" x="20" y="122" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9JZ-lJ-xyk">
+                                        <rect key="frame" x="20" y="227" width="374" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lo9-Zu-ntf">
+                                        <rect key="frame" x="185" y="301" width="44" height="30"/>
+                                        <state key="normal" title="Войти"/>
+                                        <connections>
+                                            <action selector="loginPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="zez-4Q-E41"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Lo9-Zu-ntf" firstAttribute="centerX" secondItem="dHH-NT-7UZ" secondAttribute="centerX" id="BOJ-sJ-skb"/>
+                                    <constraint firstItem="OMA-5T-Fzf" firstAttribute="top" secondItem="O5I-tz-xeo" secondAttribute="bottom" constant="50" id="EoQ-3a-vIg"/>
+                                    <constraint firstItem="aTO-5F-tGR" firstAttribute="leading" secondItem="dHH-NT-7UZ" secondAttribute="leading" constant="20" id="H6W-Od-K5X"/>
+                                    <constraint firstItem="O5I-tz-xeo" firstAttribute="centerX" secondItem="dHH-NT-7UZ" secondAttribute="centerX" id="OH9-ZZ-BF1"/>
+                                    <constraint firstAttribute="trailing" secondItem="aTO-5F-tGR" secondAttribute="trailing" constant="20" id="Uor-SD-7cP"/>
+                                    <constraint firstItem="9JZ-lJ-xyk" firstAttribute="top" secondItem="zqc-vD-cS5" secondAttribute="bottom" constant="20" id="aTW-E6-9WA"/>
+                                    <constraint firstItem="aTO-5F-tGR" firstAttribute="centerX" secondItem="dHH-NT-7UZ" secondAttribute="centerX" id="b2g-tn-dVI"/>
+                                    <constraint firstItem="OMA-5T-Fzf" firstAttribute="centerX" secondItem="dHH-NT-7UZ" secondAttribute="centerX" id="fwc-X4-aL5"/>
+                                    <constraint firstItem="9JZ-lJ-xyk" firstAttribute="centerX" secondItem="dHH-NT-7UZ" secondAttribute="centerX" id="ghe-Y2-xgG"/>
+                                    <constraint firstItem="O5I-tz-xeo" firstAttribute="centerX" secondItem="dHH-NT-7UZ" secondAttribute="centerX" id="h5e-dM-opU"/>
+                                    <constraint firstAttribute="trailing" secondItem="9JZ-lJ-xyk" secondAttribute="trailing" constant="20" id="hfc-qP-c4K"/>
+                                    <constraint firstItem="9JZ-lJ-xyk" firstAttribute="leading" secondItem="dHH-NT-7UZ" secondAttribute="leading" constant="20" id="i8o-EC-MAz"/>
+                                    <constraint firstItem="zqc-vD-cS5" firstAttribute="centerX" secondItem="dHH-NT-7UZ" secondAttribute="centerX" id="lFS-U6-uxP"/>
+                                    <constraint firstItem="Lo9-Zu-ntf" firstAttribute="top" secondItem="9JZ-lJ-xyk" secondAttribute="bottom" constant="40" id="qhz-92-WKF"/>
+                                    <constraint firstItem="O5I-tz-xeo" firstAttribute="top" secondItem="dHH-NT-7UZ" secondAttribute="top" constant="10" id="tv9-3w-R2z"/>
+                                    <constraint firstItem="aTO-5F-tGR" firstAttribute="top" secondItem="OMA-5T-Fzf" secondAttribute="bottom" constant="20" id="unL-BP-nfJ"/>
+                                    <constraint firstItem="zqc-vD-cS5" firstAttribute="top" secondItem="aTO-5F-tGR" secondAttribute="bottom" constant="30" id="xKe-op-rBt"/>
+                                    <constraint firstAttribute="bottom" secondItem="Lo9-Zu-ntf" secondAttribute="bottom" constant="10" id="y3g-sU-MoE"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dHH-NT-7UZ" secondAttribute="bottom" id="ZlL-4l-kR5"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dHH-NT-7UZ" secondAttribute="trailing" id="cvt-EK-Kgm"/>
+                            <constraint firstItem="dHH-NT-7UZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hN1-1s-Bns"/>
+                            <constraint firstItem="dHH-NT-7UZ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mpZ-yb-be7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="loginButton" destination="Lo9-Zu-ntf" id="FgF-Su-JYs"/>
+                        <outlet property="loginField" destination="aTO-5F-tGR" id="D94-q9-aFr"/>
+                        <outlet property="passwordField" destination="9JZ-lJ-xyk" id="tgs-Dm-xrm"/>
+                        <outlet property="scrollBottomConstraint" destination="ZlL-4l-kR5" id="cEM-hE-f0b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="139"/>
+        </scene>
+    </scenes>
+</document>
