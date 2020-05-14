@@ -17,7 +17,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         title = friend.name
         
-        VKRequests.instance.getPhotosById(Session.instance.userId)
+        VKRequests.getPhotosById(Session.instance.userId)
         
     }
     

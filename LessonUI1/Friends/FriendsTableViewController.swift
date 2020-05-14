@@ -44,7 +44,7 @@ class FriendsTableViewController: UITableViewController {
         friendSectionTitles = [String](friendsDictionary.keys)
         friendSectionTitles = friendSectionTitles.sorted(by: {$0 < $1})
         
-        VKRequests.instance.getFriends()
+        VKRequests.getFriends()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

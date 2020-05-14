@@ -25,7 +25,7 @@ class FindGroupsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        VKRequests.instance.searchGroups("Photo")
+        VKRequests.searchGroups("Photo")
     }
     
     

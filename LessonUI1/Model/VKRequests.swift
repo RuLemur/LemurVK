@@ -10,17 +10,14 @@ import UIKit
 import Alamofire
 
 class VKRequests {
-    static let instance = VKRequests()
     
-    private init(){}
-    
-    let baseUrl = "https://api.vk.com"
-    let baseParams: Parameters = [
+    static let baseUrl = "https://api.vk.com"
+    static let baseParams: Parameters = [
         "access_token": Session.instance.token,
         "v": "5.103",
     ]
     
-    func getFriends() {
+    static func getFriends() {
         let path = "/method/friends.get"
         var params = baseParams
         
@@ -36,7 +33,7 @@ class VKRequests {
     
     }
     
-    func getPhotosById(_ id: Int) {
+    static func getPhotosById(_ id: Int) {
         let path = "/method/photos.getAll"
         var params = baseParams
         params["owner_id"] = id
@@ -48,7 +45,7 @@ class VKRequests {
     
     }
     
-    func geMyGroups() {
+    static func geMyGroups() {
            let path = "/method/groups.get"
            let params = baseParams
         
@@ -59,7 +56,7 @@ class VKRequests {
        
        }
     
-    func searchGroups(_ searchString: String){
+    static func searchGroups(_ searchString: String){
         let path = "/method/groups.search"
         var params = baseParams
         
