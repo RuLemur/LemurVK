@@ -29,6 +29,7 @@
 		11B01DAA2441D47F000778AC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B01DA82441D47F000778AC /* Main.storyboard */; };
 		11B01DAF2441D486000778AC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11B01DAE2441D486000778AC /* Assets.xcassets */; };
 		11B01DB22441D486000778AC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11B01DB02441D486000778AC /* LaunchScreen.storyboard */; };
+		11C8BCE22467CAB3003F3B7D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C8BCE12467CAB3003F3B7D /* Session.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		11B01DAE2441D486000778AC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11B01DB12441D486000778AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11B01DB32441D486000778AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11C8BCE12467CAB3003F3B7D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				115DB354244365FE0090DC99 /* User.swift */,
 				115DB356244366830090DC99 /* Group.swift */,
+				11C8BCE12467CAB3003F3B7D /* Session.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				1107408A2451B22A006A8BE9 /* NewsTableViewController.swift in Sources */,
 				115DB352244327280090DC99 /* UserTableViewCell.swift in Sources */,
 				115DB355244365FE0090DC99 /* User.swift in Sources */,
+				11C8BCE22467CAB3003F3B7D /* Session.swift in Sources */,
 				115DB34A2443237E0090DC99 /* FriendsTableViewController.swift in Sources */,
 				115DB34E2443241B0090DC99 /* FindGroupsTableViewController.swift in Sources */,
 				1107408C2451B2CC006A8BE9 /* NewsViewCell.swift in Sources */,
