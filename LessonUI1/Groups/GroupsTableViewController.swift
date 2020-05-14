@@ -16,6 +16,8 @@ class GroupsTableViewController: UITableViewController {
         super.viewDidLoad()
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.openFindView))
         navigationItem.rightBarButtonItem = searchButton
+        
+        VKRequests.instance.geMyGroups()
     }
     
     @objc func openFindView() {

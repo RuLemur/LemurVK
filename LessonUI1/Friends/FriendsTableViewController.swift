@@ -10,7 +10,7 @@ import UIKit
 
 
 class FriendsTableViewController: UITableViewController {
-   
+    
     var friends = [
         User(name: "Rita Vrataski", avatar: UIImage(named: "rita1")!, photos: [UIImage(named: "rita1")!, UIImage(named: "rita2")!, UIImage(named: "rita3")!]),
         User(name: "Keanu Charles Reeves", avatar: UIImage(named: "keanu1")!, photos: [UIImage(named: "keanu1")!, UIImage(named: "keanu2")!, UIImage(named: "keanu3")!, UIImage(named: "keanu4")!,  UIImage(named: "keanu5")!,  UIImage(named: "keanu6")!]),
@@ -43,6 +43,8 @@ class FriendsTableViewController: UITableViewController {
         friendsDictionary = Dictionary(grouping: friends, by: { String($0.name.prefix(1)) })
         friendSectionTitles = [String](friendsDictionary.keys)
         friendSectionTitles = friendSectionTitles.sorted(by: {$0 < $1})
+        
+        VKRequests.instance.getFriends()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

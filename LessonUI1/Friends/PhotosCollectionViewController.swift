@@ -17,6 +17,8 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         title = friend.name
         
+        VKRequests.instance.getPhotosById(Session.instance.userId)
+        
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
