@@ -42,6 +42,9 @@ class PhotosCollectionViewController: UICollectionViewController {
         if userPhoto.url != "" {
             ImageHelper.getImageFromURL(userPhoto.url, completion: { image in
                 cell.photo.image = image
+                cell.like.likeCount = userPhoto.likes
+                cell.like.likeCounter.text = String(cell.like.likeCount)
+                
                 for i in 0..<self.userPhotos.count {
                     if self.userPhotos[i].id == userPhoto.id {
                         self.userPhotos[i].image = image

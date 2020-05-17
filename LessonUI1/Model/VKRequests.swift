@@ -58,6 +58,7 @@ class VKRequests {
         var params = baseParams
         params["owner_id"] = id
         params["count"] = 10
+        params["extended"] = true
         
         let url = baseUrl + path
         AF.request(url, parameters: params).responseData {

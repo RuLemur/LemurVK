@@ -13,6 +13,7 @@ struct PhotosR: Codable {
     let id: Int
     var owner_id: Int
     var sizes: [Sizes]
+    let likes: Likes
 }
 
 struct Photos {
@@ -20,10 +21,12 @@ struct Photos {
     var url: String!
     var owner_id: Int
     var image: UIImage = UIImage()
+    let likes: Int
     
     init(_ photosR: PhotosR) {
         id = photosR.id
         owner_id = photosR.owner_id
+        likes = photosR.likes.count
         
         for size in photosR.sizes {
             if size.type == "r" {
@@ -39,4 +42,8 @@ struct Photos {
 struct Sizes: Codable {
     let url: String
     let type: String
+}
+
+struct Likes: Codable {
+    let count: Int
 }
