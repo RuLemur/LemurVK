@@ -10,22 +10,16 @@ import UIKit
 
 class FindGroupsTableViewController: UITableViewController {
     
-    let groups = [
-        Group(name: "Pikabu", avatar: UIImage(named: "group_img")!),
-        Group(name: "VK", avatar: UIImage(named: "group_img")!),
-        Group(name: "Girls", avatar: UIImage(named: "group_img")!),
-        Group(name: "Cats", avatar: UIImage(named: "group_img")!),
-        Group(name: "Video", avatar: UIImage(named: "group_img")!),
-        Group(name: "Anime", avatar: UIImage(named: "group_img")!),
-        Group(name: "iOS", avatar: UIImage(named: "group_img")!),
-        Group(name: "Sport", avatar: UIImage(named: "group_img")!),
-        Group(name: "BMW", avatar: UIImage(named: "group_img")!)
-    ]
+    var groups: [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        VKRequests.searchGroups("Photo")
+        VKRequests.searchGroups("Photo", completion: { groups in
+            self.groups = groups
+            self.tableView.reloadData()
+            
+        })
     }
     
     
@@ -42,8 +36,22 @@ class FindGroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "allGroup", for: indexPath)
         cell.textLabel?.text = groups[indexPath.row].name
-        cell.imageView?.image = groups[indexPath.row].avatar
         
+        if groups[indexPath.row].photo_100 != "" {
+            ImageHelper.getImageFromURL(groups[indexPath.row].photo_100, completion: { image in
+                cell.imageView?.image = image
+                for i in 0..<self.groups.count {
+                    if self.groups[i].id == self.groups[indexPath.row].id {
+                        self.groups[i].avatar = image
+                        self.groups[i].photo_100 = ""
+                        break
+                    }
+                }
+
+            })
+        } else {
+            cell.imageView?.image = groups[indexPath.row].avatar
+        }
         return cell
     }
     

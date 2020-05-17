@@ -11,18 +11,7 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController {
     
-    var friends = [
-        User(name: "Rita Vrataski", avatar: UIImage(named: "rita1")!, photos: [UIImage(named: "rita1")!, UIImage(named: "rita2")!, UIImage(named: "rita3")!]),
-        User(name: "Keanu Charles Reeves", avatar: UIImage(named: "keanu1")!, photos: [UIImage(named: "keanu1")!, UIImage(named: "keanu2")!, UIImage(named: "keanu3")!, UIImage(named: "keanu4")!,  UIImage(named: "keanu5")!,  UIImage(named: "keanu6")!]),
-        User(name: "Obi Van Kenobi", avatar: UIImage(named: "kenobi1")!, photos: [UIImage(named: "kenobi1")!]),
-        User(name: "Magister Yoda", avatar: UIImage(named: "yoda1")!, photos: [UIImage(named: "yoda1")!]),
-        User(name: "Zoydberg", avatar: UIImage(named: "zoydberg1")!, photos: [UIImage(named: "zoydberg1")!]),
-        User(name: "Sasha Gray", avatar: UIImage(named: "gray1")!, photos: [UIImage(named: "gray1")!]),
-        User(name: "Fry", avatar: UIImage(named: "fry1")!, photos: [UIImage(named: "fry1")!]),
-        User(name: "Bender", avatar: UIImage(named: "bender1")!, photos: [UIImage(named: "bender1")!]),
-        User(name: "Wacky", avatar: UIImage(named: "wacky1")!, photos: [UIImage(named: "wacky1")!]),
-        User(name: "Ja Ja Binks", avatar: UIImage(named: "binks1")!, photos: [UIImage(named: "binks1")!])
-    ]
+    var friends: [User] = []
     
     var filteredFriends = [User]() {
         didSet {
@@ -31,7 +20,7 @@ class FriendsTableViewController: UITableViewController {
     }
     var friendsDictionary = [String: [User]]() {
         didSet {
-            friends = friendsDictionary.flatMap {$0.value}.sorted {$0.name < $1.name }
+            friends = friendsDictionary.flatMap {$0.value}.sorted {$0.first_name < $1.first_name }
             tableView.reloadData()
         }
     }
@@ -40,15 +29,20 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        friendsDictionary = Dictionary(grouping: friends, by: { String($0.name.prefix(1)) })
-        friendSectionTitles = [String](friendsDictionary.keys)
-        friendSectionTitles = friendSectionTitles.sorted(by: {$0 < $1})
+        VKRequests.getFriends(completion: { users in
+            self.friends = users
+            self.friendsDictionary = Dictionary(grouping: self.friends, by: { String($0.last_name.prefix(1)) })
+            self.friendSectionTitles = [String](self.friendsDictionary.keys)
+            self.friendSectionTitles = self.friendSectionTitles.sorted(by: {$0 < $1})
+            self.tableView.reloadData()
+            
+        })
         
-        VKRequests.getFriends()
+        
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         
         
         if let photosController = segue.destination as? PhotosCollectionViewController {
@@ -87,8 +81,33 @@ class FriendsTableViewController: UITableViewController {
             friend = filteredFriends[indexPath.row]
         }
         
-        cell.name.text = friend!.name
-        cell.avatar.avatar = friend!.avatar
+        cell.name.text = friend!.first_name + " " + friend!.last_name
+        
+        if friend!.photo_100 != "" {
+            ImageHelper.getImageFromURL(friend!.photo_100, completion: { image in
+                friend!.avatar = image
+                cell.avatar.avatar = image
+                for i in 0..<self.friends.count {
+                    if self.friends[i].id == friend!.id {
+                        self.friends[i].avatar = image
+                        self.friends[i].photo_100 = ""
+                        break
+                    }
+                }
+                
+                for (key, group) in self.friendsDictionary {
+                    for i in 0..<group.count {
+                        if group[i].id == friend!.id {
+                            self.friendsDictionary[key]![i].avatar = image
+                            self.friendsDictionary[key]![i].photo_100 = ""
+                            break
+                        }
+                    }
+                }
+            })
+        } else {
+            cell.avatar.avatar = friend!.avatar
+        }
         return cell
     }
     
@@ -104,7 +123,7 @@ extension FriendsTableViewController: UISearchBarDelegate {
             clearSearch(searchBar)
             return
         }
-        filteredFriends = friends.filter {$0.name.lowercased().contains(searchText.lowercased())}
+        filteredFriends = friends.filter {$0.first_name.lowercased().contains(searchText.lowercased())}
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

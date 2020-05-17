@@ -10,6 +10,8 @@
 		1107408A2451B22A006A8BE9 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110740892451B22A006A8BE9 /* NewsTableViewController.swift */; };
 		1107408C2451B2CC006A8BE9 /* NewsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1107408B2451B2CC006A8BE9 /* NewsViewCell.swift */; };
 		1107408F2455F222006A8BE9 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1107408E2455F222006A8BE9 /* FullPhotoViewController.swift */; };
+		1110E069247186DA0007F7BD /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1110E068247186DA0007F7BD /* ImageHelper.swift */; };
+		1110E06B2471E9AE0007F7BD /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1110E06A2471E9AE0007F7BD /* Photos.swift */; };
 		115DB348244322B70090DC99 /* FriendPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115DB347244322B70090DC99 /* FriendPhotoCell.swift */; };
 		115DB34A2443237E0090DC99 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115DB3492443237E0090DC99 /* FriendsTableViewController.swift */; };
 		115DB34C244323D10090DC99 /* GroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115DB34B244323D10090DC99 /* GroupsTableViewController.swift */; };
@@ -40,6 +42,8 @@
 		110740892451B22A006A8BE9 /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		1107408B2451B2CC006A8BE9 /* NewsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewCell.swift; sourceTree = "<group>"; };
 		1107408E2455F222006A8BE9 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FullPhotoViewController.swift; path = LessonUI1/FullPhotoViewController.swift; sourceTree = SOURCE_ROOT; };
+		1110E068247186DA0007F7BD /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
+		1110E06A2471E9AE0007F7BD /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		115DB347244322B70090DC99 /* FriendPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendPhotoCell.swift; sourceTree = "<group>"; };
 		115DB3492443237E0090DC99 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		115DB34B244323D10090DC99 /* GroupsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +99,14 @@
 			path = Friends;
 			sourceTree = "<group>";
 		};
+		1110E067247186BE0007F7BD /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1110E068247186DA0007F7BD /* ImageHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		115DB353244365DE0090DC99 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +114,7 @@
 				115DB354244365FE0090DC99 /* User.swift */,
 				115DB356244366830090DC99 /* Group.swift */,
 				11C8BCE12467CAB3003F3B7D /* Session.swift */,
+				1110E06A2471E9AE0007F7BD /* Photos.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -163,6 +176,7 @@
 		11B01DA12441D47F000778AC /* LessonUI1 */ = {
 			isa = PBXGroup;
 			children = (
+				1110E067247186BE0007F7BD /* Helpers */,
 				1183F58D2457187000115D57 /* xibs */,
 				1183F58C2457045A00115D57 /* News */,
 				1183F58B2457042B00115D57 /* Groups */,
@@ -320,6 +334,7 @@
 				1183F5A124573F6400115D57 /* UIView+nibLoad.swift in Sources */,
 				115DB34C244323D10090DC99 /* GroupsTableViewController.swift in Sources */,
 				11B01DA72441D47F000778AC /* ViewController.swift in Sources */,
+				1110E06B2471E9AE0007F7BD /* Photos.swift in Sources */,
 				115DB357244366830090DC99 /* Group.swift in Sources */,
 				1183F59D24572D2F00115D57 /* LoadingView.swift in Sources */,
 				115DB37D2445BF650090DC99 /* AvatarView.swift in Sources */,
@@ -337,6 +352,7 @@
 				1107408F2455F222006A8BE9 /* FullPhotoViewController.swift in Sources */,
 				115DB37F244634CB0090DC99 /* LikeControl.swift in Sources */,
 				11B01DA32441D47F000778AC /* AppDelegate.swift in Sources */,
+				1110E069247186DA0007F7BD /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

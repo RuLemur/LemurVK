@@ -9,15 +9,18 @@
 import UIKit
 
 class GroupsTableViewController: UITableViewController {
-    var groups: [Group] = [
-        Group(name: "Pikabu", avatar: UIImage(named: "group_img")!)]
+    var groups: [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.openFindView))
         navigationItem.rightBarButtonItem = searchButton
         
-        VKRequests.geMyGroups()
+        VKRequests.geMyGroups(completion: { groups in
+            self.groups = groups
+            self.tableView.reloadData()
+            
+        })
     }
     
     @objc func openFindView() {
@@ -37,7 +40,23 @@ class GroupsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
         cell.textLabel?.text = groups[indexPath.row].name
-        cell.imageView?.image = groups[indexPath.row].avatar
+        
+        if groups[indexPath.row].photo_100 != "" {
+            ImageHelper.getImageFromURL(groups[indexPath.row].photo_100, completion: { image in
+                cell.imageView?.image = image
+                for i in 0..<self.groups.count {
+                    if self.groups[i].id == self.groups[indexPath.row].id {
+                        self.groups[i].avatar = image
+                        self.groups[i].photo_100 = ""
+                        break
+                    }
+                }
+
+            })
+        } else {
+            cell.imageView?.image = groups[indexPath.row].avatar
+        }
+        
         return cell
     }
     
