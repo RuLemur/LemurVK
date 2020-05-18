@@ -20,7 +20,7 @@ class FriendsTableViewController: UITableViewController {
     }
     var friendsDictionary = [String: [User]]() {
         didSet {
-            friends = friendsDictionary.flatMap {$0.value}.sorted {$0.first_name < $1.first_name }
+            friends = friendsDictionary.flatMap {$0.value}.sorted {$0.firstName < $1.firstName }
             tableView.reloadData()
         }
     }
@@ -31,7 +31,7 @@ class FriendsTableViewController: UITableViewController {
         
         VKRequests.getFriends(completion: { users in
             self.friends = users
-            self.friendsDictionary = Dictionary(grouping: self.friends, by: { String($0.last_name.prefix(1)) })
+            self.friendsDictionary = Dictionary(grouping: self.friends, by: { String($0.lastName.prefix(1)) })
             self.friendSectionTitles = [String](self.friendsDictionary.keys)
             self.friendSectionTitles = self.friendSectionTitles.sorted(by: {$0 < $1})
             self.tableView.reloadData()
@@ -81,16 +81,16 @@ class FriendsTableViewController: UITableViewController {
             friend = filteredFriends[indexPath.row]
         }
         
-        cell.name.text = friend!.first_name + " " + friend!.last_name
+        cell.name.text = friend!.firstName + " " + friend!.lastName
         
-        if friend!.photo_100 != "" {
-            ImageHelper.getImageFromURL(friend!.photo_100, completion: { image in
+        if friend!.photo100 != "" {
+            ImageHelper.getImageFromURL(friend!.photo100, completion: { image in
                 friend!.avatar = image
                 cell.avatar.avatar = image
                 for i in 0..<self.friends.count {
                     if self.friends[i].id == friend!.id {
                         self.friends[i].avatar = image
-                        self.friends[i].photo_100 = ""
+                        self.friends[i].photo100 = ""
                         break
                     }
                 }
@@ -99,7 +99,7 @@ class FriendsTableViewController: UITableViewController {
                     for i in 0..<group.count {
                         if group[i].id == friend!.id {
                             self.friendsDictionary[key]![i].avatar = image
-                            self.friendsDictionary[key]![i].photo_100 = ""
+                            self.friendsDictionary[key]![i].photo100 = ""
                             break
                         }
                     }
@@ -123,7 +123,7 @@ extension FriendsTableViewController: UISearchBarDelegate {
             clearSearch(searchBar)
             return
         }
-        filteredFriends = friends.filter {$0.first_name.lowercased().contains(searchText.lowercased())}
+        filteredFriends = friends.filter {$0.firstName.lowercased().contains(searchText.lowercased())}
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

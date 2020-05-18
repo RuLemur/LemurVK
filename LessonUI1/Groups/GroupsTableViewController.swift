@@ -41,13 +41,13 @@ class GroupsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
         cell.textLabel?.text = groups[indexPath.row].name
         
-        if groups[indexPath.row].photo_100 != "" {
-            ImageHelper.getImageFromURL(groups[indexPath.row].photo_100, completion: { image in
+        if groups[indexPath.row].photo100 != "" {
+            ImageHelper.getImageFromURL(groups[indexPath.row].photo100, completion: { image in
                 cell.imageView?.image = image
                 for i in 0..<self.groups.count {
                     if self.groups[i].id == self.groups[indexPath.row].id {
                         self.groups[i].avatar = image
-                        self.groups[i].photo_100 = ""
+                        self.groups[i].photo100 = ""
                         break
                     }
                 }

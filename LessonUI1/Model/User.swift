@@ -10,27 +10,32 @@ import UIKit
 
 struct UserR: Codable {
     let id: Int
-    let first_name: String
-    let last_name: String
-    let photo_100: String
-//    let avatar: UIImage
-//    let photos: [UIImage]
+    let firstName: String
+    let lastName: String
+    let photo100: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case photo100 = "photo_100"
+    }
 }
 
 struct User {
     let id: Int
-    let first_name: String
-    let last_name: String
-    var photo_100: String = ""
+    let firstName: String
+    let lastName: String
+    var photo100: String = ""
     
     var avatar: UIImage = UIImage()
     var photos: [UIImage] = []
     
     init(_ userR: UserR) {
         id = userR.id
-        first_name = userR.first_name
-        last_name = userR.last_name
-        photo_100 = userR.photo_100
+        firstName = userR.firstName
+        lastName = userR.lastName
+        photo100 = userR.photo100
     }
 
 }

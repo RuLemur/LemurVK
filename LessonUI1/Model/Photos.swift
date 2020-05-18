@@ -11,21 +11,29 @@ import UIKit
 
 struct PhotosR: Codable {
     let id: Int
-    var owner_id: Int
+    var ownerId: Int
     var sizes: [Sizes]
     let likes: Likes
+    
+     enum CodingKeys: String, CodingKey {
+        case id
+        case ownerId = "owner_id"
+        case sizes
+        case likes
+    }
+    
 }
 
 struct Photos {
     let id: Int
     var url: String!
-    var owner_id: Int
+    var ownerId: Int
     var image: UIImage = UIImage()
     let likes: Int
     
     init(_ photosR: PhotosR) {
         id = photosR.id
-        owner_id = photosR.owner_id
+        ownerId = photosR.ownerId
         likes = photosR.likes.count
         
         for size in photosR.sizes {

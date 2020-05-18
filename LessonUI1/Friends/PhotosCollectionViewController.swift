@@ -15,7 +15,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = friend.first_name + " " + friend.last_name
+        title = friend.firstName + " " + friend.lastName
         
         VKRequests.getPhotosById(friend.id, completion: { photos in
             self.userPhotos = photos
