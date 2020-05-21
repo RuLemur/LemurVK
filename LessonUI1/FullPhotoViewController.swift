@@ -10,7 +10,7 @@ import UIKit
 
 class FullPhotoViewController: UIViewController {
     
-    var friend: User!
+    var userPhotos: [Photos]!
     var selectedPhoto = 0
     
     @IBOutlet var panGest: UIPanGestureRecognizer!
@@ -59,7 +59,7 @@ class FullPhotoViewController: UIViewController {
             self.animation.fractionComplete = abs((currentTap / self.view.frame.width) - (self.startTap / self.view.frame.width))
         case .ended:
             self.selectedPhoto += isRightSwipe ? 1 : -1
-            if self.selectedPhoto < 0 || self.selectedPhoto >= self.friend.photos.count {
+            if self.selectedPhoto < 0 || self.selectedPhoto >= self.userPhotos.count {
                 self.cancelAnimation()
                 self.selectedPhoto += self.isRightSwipe ? -1 : +1
                 
@@ -137,17 +137,17 @@ class FullPhotoViewController: UIViewController {
         if leftPhotoIndex < 0 {
             leftImage.image = nil
         } else {
-            leftImage.image = friend.photos[leftPhotoIndex]
+            leftImage.image = userPhotos[leftPhotoIndex].image
         }
         
-        if rightPhotoIndex >= friend.photos.count {
+        if rightPhotoIndex >= userPhotos.count {
             rightImage.image = nil
         }
         else {
-            rightImage.image = friend.photos[rightPhotoIndex]
+            rightImage.image = userPhotos[rightPhotoIndex].image
         }
         
-        centerImage.image = friend.photos[centerPhotoIndex]
+        centerImage.image = userPhotos[centerPhotoIndex].image
         leftImage.translatesAutoresizingMaskIntoConstraints = false
         centerImage.translatesAutoresizingMaskIntoConstraints = false
         rightImage.translatesAutoresizingMaskIntoConstraints = false

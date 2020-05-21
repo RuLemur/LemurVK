@@ -8,5 +8,6 @@ target 'LessonUI1' do
   # Pods for LessonUI1
 
   pod 'Alamofire', '~> 5.1'
+  pod 'AlamofireImage', '~> 4.1'
 	
 end
