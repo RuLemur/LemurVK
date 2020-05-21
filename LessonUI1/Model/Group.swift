@@ -22,10 +22,10 @@ struct GroupR: Codable {
 }
 
 class Group: Object {
-    @objc dynamic var id: Int
-    @objc dynamic var name: String
-    @objc dynamic var photo100: String
-    @objc dynamic var avatar: UIImage = UIImage()
+    @objc dynamic var id: Int = -1
+    @objc dynamic var name: String = ""
+    @objc dynamic var photo100: String = ""
+    var avatar: UIImage = UIImage()
     
     init(_ groupR: GroupR) {
         id = groupR.id
@@ -34,6 +34,7 @@ class Group: Object {
     }
     
     required init() {
-        fatalError("init() has not been implemented")
+        
+        return
     }
 }

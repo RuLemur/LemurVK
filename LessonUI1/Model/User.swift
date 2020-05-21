@@ -24,13 +24,13 @@ struct UserR: Codable {
 }
 
 class User: Object {
-    @objc dynamic let id: Int
-    @objc dynamic let firstName: String
-    @objc dynamic let lastName: String
+    @objc dynamic var id: Int = -1
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
     @objc dynamic var photo100: String = ""
     
-    @objc dynamic var avatar: UIImage = UIImage()
-    @objc dynamic var photos: [UIImage] = []
+    var avatar: UIImage = UIImage()
+    var photos: [UIImage] = []
     
     init(_ userR: UserR) {
         id = userR.id
@@ -40,7 +40,7 @@ class User: Object {
     }
     
     required init() {
-        fatalError("init() has not been implemented")
+        return
     }
     
 }

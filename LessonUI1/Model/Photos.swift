@@ -25,11 +25,11 @@ struct PhotosR: Codable {
 }
 
 class Photos: Object {
-    @objc dynamic let id: Int
-    @objc dynamic var url: String!
-    @objc dynamic var ownerId: Int
-    @objc dynamic var image: UIImage = UIImage()
-    @objc dynamic let likes: Int
+    @objc dynamic var id: Int = -1
+    @objc dynamic var url: String! = ""
+    @objc dynamic var ownerId: Int = -1
+    var image: UIImage = UIImage()
+    @objc dynamic var likes: Int = -1
     
     init(_ photosR: PhotosR) {
         id = photosR.id
@@ -47,7 +47,7 @@ class Photos: Object {
     }
     
     required init() {
-        fatalError("init() has not been implemented")
+        return
     }
 }
 
