@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct UserR: Codable {
     let id: Int
@@ -22,14 +23,14 @@ struct UserR: Codable {
     }
 }
 
-struct User {
-    let id: Int
-    let firstName: String
-    let lastName: String
-    var photo100: String = ""
+class User: Object {
+    @objc dynamic let id: Int
+    @objc dynamic let firstName: String
+    @objc dynamic let lastName: String
+    @objc dynamic var photo100: String = ""
     
-    var avatar: UIImage = UIImage()
-    var photos: [UIImage] = []
+    @objc dynamic var avatar: UIImage = UIImage()
+    @objc dynamic var photos: [UIImage] = []
     
     init(_ userR: UserR) {
         id = userR.id
@@ -37,5 +38,9 @@ struct User {
         lastName = userR.lastName
         photo100 = userR.photo100
     }
-
+    
+    required init() {
+        fatalError("init() has not been implemented")
+    }
+    
 }
