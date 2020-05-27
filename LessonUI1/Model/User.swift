@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct UserR: Codable {
     let id: Int
@@ -22,11 +23,11 @@ struct UserR: Codable {
     }
 }
 
-struct User {
-    let id: Int
-    let firstName: String
-    let lastName: String
-    var photo100: String = ""
+class User: Object {
+    @objc dynamic var id: Int = -1
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var photo100: String = ""
     
     var avatar: UIImage = UIImage()
     var photos: [UIImage] = []
@@ -37,5 +38,9 @@ struct User {
         lastName = userR.lastName
         photo100 = userR.photo100
     }
-
+    
+    required init() {
+        return
+    }
+    
 }

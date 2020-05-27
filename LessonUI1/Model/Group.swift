@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 struct GroupR: Codable {
     var id: Int
@@ -20,15 +21,20 @@ struct GroupR: Codable {
     }
 }
 
-struct Group {
-    var id: Int
-    var name: String
-    var photo100: String
+class Group: Object {
+    @objc dynamic var id: Int = -1
+    @objc dynamic var name: String = ""
+    @objc dynamic var photo100: String = ""
     var avatar: UIImage = UIImage()
     
     init(_ groupR: GroupR) {
         id = groupR.id
         name = groupR.name
         photo100 = groupR.photo100
+    }
+    
+    required init() {
+        
+        return
     }
 }

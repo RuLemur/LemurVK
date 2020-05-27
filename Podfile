@@ -9,5 +9,6 @@ target 'LessonUI1' do
 
   pod 'Alamofire', '~> 5.1'
   pod 'AlamofireImage', '~> 4.1'
-	
+  pod 'RealmSwift', '~> 5.0.0'
+  
 end

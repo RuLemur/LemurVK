@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RealmSwift
 
 struct PhotosR: Codable {
     let id: Int
@@ -24,12 +24,12 @@ struct PhotosR: Codable {
     
 }
 
-struct Photos {
-    let id: Int
-    var url: String!
-    var ownerId: Int
+class Photos: Object {
+    @objc dynamic var id: Int = -1
+    @objc dynamic var url: String! = ""
+    @objc dynamic var ownerId: Int = -1
     var image: UIImage = UIImage()
-    let likes: Int
+    @objc dynamic var likes: Int = -1
     
     init(_ photosR: PhotosR) {
         id = photosR.id
@@ -44,6 +44,10 @@ struct Photos {
                 url = size.url
             }
         }
+    }
+    
+    required init() {
+        return
     }
 }
 
