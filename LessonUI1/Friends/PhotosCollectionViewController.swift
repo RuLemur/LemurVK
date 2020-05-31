@@ -7,20 +7,59 @@
 //
 
 import UIKit
+import RealmSwift
 
 class PhotosCollectionViewController: UICollectionViewController {
     
     var friend: User!
-    var userPhotos: [Photos] = []
+    var userPhotos: [Photo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = friend.firstName + " " + friend.lastName
         
-        VKRequests.getPhotosById(friend.id, completion: { photos in
-            self.userPhotos = photos
-            self.collectionView.reloadData()
+        self.loadPhotosData(friend.id, completion: { [weak self] in
+            self!.loadData()
+            self!.collectionView.reloadData()
         })
+        
+    }
+    
+    func loadData() {
+        do {
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm(configuration: config)
+            print(realm.configuration.fileURL!)
+            
+            let photos = realm.objects(Photo.self)
+            self.userPhotos = Array(photos)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadPhotosData(_ id: Int, completion: @escaping () -> Void) {
+        VKRequests.getPhotosById(id, completion: { photos in
+            
+            self.savePhotosData(photos)
+            completion()
+            
+        })
+    }
+    
+    func savePhotosData(_ photos: [Photo]) {
+        do {
+            let realm = try Realm()
+            let oldPhotos = realm.objects(Photo.self)
+            
+            realm.beginWrite()
+            realm.delete(oldPhotos)
+            realm.add(photos)
+            try realm.commitWrite()
+            
+        } catch {
+            print(error)
+        }
         
     }
     
@@ -39,7 +78,7 @@ class PhotosCollectionViewController: UICollectionViewController {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FriendPhotoCell", for: indexPath) as! FriendPhotoCell
         let userPhoto = userPhotos[indexPath.row]
-        if userPhoto.url != "" {
+        if userPhoto.image == nil {
             ImageHelper.getImageFromURL(userPhoto.url, completion: { image in
                 cell.photo.image = image
                 cell.like.likeCount = userPhoto.likes
@@ -48,14 +87,13 @@ class PhotosCollectionViewController: UICollectionViewController {
                 for i in 0..<self.userPhotos.count {
                     if self.userPhotos[i].id == userPhoto.id {
                         self.userPhotos[i].image = image
-                        self.userPhotos[i].url = ""
                         break
                     }
                 }
             })
         }
         return cell
-    
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

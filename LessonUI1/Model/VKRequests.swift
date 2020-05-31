@@ -53,7 +53,7 @@ class VKRequests {
         
     }
     
-    static func getPhotosById(_ id: Int, completion: @escaping ([Photos]) -> Void) {
+    static func getPhotosById(_ id: Int, completion: @escaping ([Photo]) -> Void) {
         let path = "/method/photos.getAll"
         var params = baseParams
         params["owner_id"] = id
@@ -67,10 +67,10 @@ class VKRequests {
             
             
             do {
-                var photos: [Photos] = []
+                var photos: [Photo] = []
                 let photosR = try JSONDecoder().decode(VKResponse<PhotosR>.self, from: data)
                 photosR.response.items.forEach({photoR in
-                    photos.append(Photos(photoR))
+                    photos.append(Photo(photoR))
                 })
                 completion(photos)
             } catch {

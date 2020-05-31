@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
     var groups: [Group] = []
@@ -16,12 +17,49 @@ class GroupsTableViewController: UITableViewController {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(self.openFindView))
         navigationItem.rightBarButtonItem = searchButton
         
+        self.loadGroupsData {[weak self] in
+            self!.loadData()
+            self!.tableView.reloadData()
+        }
+        
+    }
+    
+    func loadData() {
+        do {
+            let realm = try Realm()
+            print(realm.configuration.fileURL!)
+            let groups = realm.objects(Group.self)
+            self.groups = Array(groups)
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadGroupsData(completion: @escaping () -> Void) {
         VKRequests.geMyGroups(completion: { groups in
-            self.groups = groups
-            self.tableView.reloadData()
+            
+            self.saveGroupsData(groups)
+            completion()
             
         })
     }
+    
+    func saveGroupsData(_ groups: [Group]) {
+        do {
+            let realm = try Realm()
+            let oldGroups = realm.objects(Group.self)
+            
+            realm.beginWrite()
+            realm.delete(oldGroups)
+            realm.add(groups)
+            try realm.commitWrite()
+            
+        } catch {
+            print(error)
+        }
+        
+    }
+    
     
     @objc func openFindView() {
         performSegue(withIdentifier: "openSearch", sender: nil)
@@ -41,17 +79,16 @@ class GroupsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GroupCell", for: indexPath)
         cell.textLabel?.text = groups[indexPath.row].name
         
-        if groups[indexPath.row].photo100 != "" {
+        if groups[indexPath.row].avatar == nil {
             ImageHelper.getImageFromURL(groups[indexPath.row].photo100, completion: { image in
                 cell.imageView?.image = image
                 for i in 0..<self.groups.count {
                     if self.groups[i].id == self.groups[indexPath.row].id {
                         self.groups[i].avatar = image
-                        self.groups[i].photo100 = ""
                         break
                     }
                 }
-
+                
             })
         } else {
             cell.imageView?.image = groups[indexPath.row].avatar

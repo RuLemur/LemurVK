@@ -24,12 +24,12 @@ struct PhotosR: Codable {
     
 }
 
-class Photos: Object {
-    @objc dynamic var id: Int = -1
+class Photo: Object {
+    @objc dynamic var id: Int = 0
     @objc dynamic var url: String! = ""
-    @objc dynamic var ownerId: Int = -1
-    var image: UIImage = UIImage()
-    @objc dynamic var likes: Int = -1
+    @objc dynamic var ownerId: Int = 0
+    var image: UIImage? = nil
+    @objc dynamic var likes: Int = 0
     
     init(_ photosR: PhotosR) {
         id = photosR.id
@@ -49,6 +49,11 @@ class Photos: Object {
     required init() {
         return
     }
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
+    
 }
 
 struct Sizes: Codable {

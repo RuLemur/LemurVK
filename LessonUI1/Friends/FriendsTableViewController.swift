@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
     
@@ -29,21 +29,55 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        VKRequests.getFriends(completion: { users in
-            self.friends = users
-            self.friendsDictionary = Dictionary(grouping: self.friends, by: { String($0.lastName.prefix(1)) })
-            self.friendSectionTitles = [String](self.friendsDictionary.keys)
-            self.friendSectionTitles = self.friendSectionTitles.sorted(by: {$0 < $1})
-            self.tableView.reloadData()
-            
-        })
-        
+        self.loadFriendsData { [weak self] in
+            self!.loadData()
+            self!.tableView.reloadData()
+        }
         
     }
     
+    func loadData() {
+        do {
+            let config = Realm.Configuration(deleteRealmIfMigrationNeeded: true)
+            let realm = try Realm(configuration: config)
+            print(realm.configuration.fileURL!)
+            
+            let friends = realm.objects(User.self)
+            self.friends = Array(friends)
+            self.friendsDictionary = Dictionary(grouping: self.friends, by: { String($0.lastName.prefix(1)) })
+            self.friendSectionTitles = [String](self.friendsDictionary.keys)
+            self.friendSectionTitles = self.friendSectionTitles.sorted(by: {$0 < $1})
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadFriendsData(completion: @escaping () -> Void) {
+        VKRequests.getFriends(completion: { users in
+            
+            self.saveFriendsData(users)
+            completion()
+            
+        })
+    }
+    
+    func saveFriendsData(_ friends: [User]) {
+        do {
+            let realm = try Realm()
+            let oldFriends = realm.objects(User.self)
+            
+            realm.beginWrite()
+            realm.delete(oldFriends)
+            realm.add(friends)
+            try realm.commitWrite()
+            
+        } catch {
+            print(error)
+        }
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         
         if let photosController = segue.destination as? PhotosCollectionViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -83,30 +117,28 @@ class FriendsTableViewController: UITableViewController {
         
         cell.name.text = friend!.firstName + " " + friend!.lastName
         
-        if friend!.photo100 != "" {
+        if friend!.avatar == nil {
             ImageHelper.getImageFromURL(friend!.photo100, completion: { image in
                 friend!.avatar = image
                 cell.avatar.avatar = image
                 for i in 0..<self.friends.count {
                     if self.friends[i].id == friend!.id {
                         self.friends[i].avatar = image
-                        self.friends[i].photo100 = ""
                         break
                     }
                 }
-                
+
                 for (key, group) in self.friendsDictionary {
                     for i in 0..<group.count {
                         if group[i].id == friend!.id {
                             self.friendsDictionary[key]![i].avatar = image
-                            self.friendsDictionary[key]![i].photo100 = ""
                             break
                         }
                     }
                 }
             })
         } else {
-            cell.avatar.avatar = friend!.avatar
+            cell.avatar.avatar = friend!.avatar!
         }
         return cell
     }
