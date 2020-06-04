@@ -22,15 +22,19 @@ struct GroupR: Codable {
 }
 
 class Group: Object {
-    @objc dynamic var id: Int = -1
+    @objc dynamic var id: Int = 0
     @objc dynamic var name: String = ""
     @objc dynamic var photo100: String = ""
-    var avatar: UIImage = UIImage()
+    var avatar: UIImage? = nil
     
     init(_ groupR: GroupR) {
         id = groupR.id
         name = groupR.name
         photo100 = groupR.photo100
+    }
+    
+    override class func primaryKey() -> String? {
+        return "id"
     }
     
     required init() {

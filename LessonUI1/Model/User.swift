@@ -24,12 +24,12 @@ struct UserR: Codable {
 }
 
 class User: Object {
-    @objc dynamic var id: Int = -1
+    @objc dynamic var id: Int = 0
     @objc dynamic var firstName: String = ""
     @objc dynamic var lastName: String = ""
     @objc dynamic var photo100: String = ""
     
-    var avatar: UIImage = UIImage()
+    var avatar: UIImage? = nil
     var photos: [UIImage] = []
     
     init(_ userR: UserR) {
@@ -37,6 +37,10 @@ class User: Object {
         firstName = userR.firstName
         lastName = userR.lastName
         photo100 = userR.photo100
+    }
+    
+    override class func primaryKey() -> String? {
+        return "id"
     }
     
     required init() {

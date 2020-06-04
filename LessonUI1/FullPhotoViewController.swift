@@ -10,7 +10,7 @@ import UIKit
 
 class FullPhotoViewController: UIViewController {
     
-    var userPhotos: [Photos]!
+    var userPhotos: [Photo]!
     var selectedPhoto = 0
     
     @IBOutlet var panGest: UIPanGestureRecognizer!
@@ -30,6 +30,7 @@ class FullPhotoViewController: UIViewController {
         setImage()
         
     }
+    
     var startTap: CGFloat!
     
     @IBAction func pan(_ sender: UIPanGestureRecognizer) {
