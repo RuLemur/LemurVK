@@ -12,6 +12,7 @@ import RealmSwift
 class FriendsTableViewController: UITableViewController {
     
     var friends: [User] = []
+//    let observer: NotificationCenter?
     
     var filteredFriends = [User]() {
         didSet {
