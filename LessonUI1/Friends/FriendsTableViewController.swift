@@ -12,6 +12,9 @@ import RealmSwift
 class FriendsTableViewController: UITableViewController {
     
     var friends: [User] = []
+
+    var token: NotificationToken?
+
     
     var filteredFriends = [User]() {
         didSet {
@@ -43,6 +46,17 @@ class FriendsTableViewController: UITableViewController {
             print(realm.configuration.fileURL!)
             
             let friends = realm.objects(User.self)
+            self.token = friends.observe{ (changes: RealmCollectionChange) in
+                switch changes {
+                    
+                case .initial(_):
+                    self.tableView.reloadData()
+                case .update(_, _, _, _):
+                    self.tableView.reloadData()
+                case .error(_):
+                    print("error")
+                }
+            }
             self.friends = Array(friends)
             self.friendsDictionary = Dictionary(grouping: self.friends, by: { String($0.lastName.prefix(1)) })
             self.friendSectionTitles = [String](self.friendsDictionary.keys)

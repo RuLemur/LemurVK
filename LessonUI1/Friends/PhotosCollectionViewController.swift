@@ -13,6 +13,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     
     var friend: User!
     var userPhotos: [Photo] = []
+    var token: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,17 @@ class PhotosCollectionViewController: UICollectionViewController {
             print(realm.configuration.fileURL!)
             
             let photos = realm.objects(Photo.self)
+            self.token = photos.observe{ (changes: RealmCollectionChange) in
+                switch changes {
+                    
+                case .initial(_):
+                    self.collectionView.reloadData()
+                case .update(_, _, _, _):
+                    self.collectionView.reloadData()
+                case .error(_):
+                    print("error")
+                }
+            }
             self.userPhotos = Array(photos)
         } catch {
             print(error)

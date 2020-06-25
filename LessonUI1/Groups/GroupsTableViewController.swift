@@ -11,6 +11,7 @@ import RealmSwift
 
 class GroupsTableViewController: UITableViewController {
     var groups: [Group] = []
+    var token: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +30,17 @@ class GroupsTableViewController: UITableViewController {
             let realm = try Realm()
             print(realm.configuration.fileURL!)
             let groups = realm.objects(Group.self)
+            self.token = groups.observe{ (changes: RealmCollectionChange) in
+                switch changes {
+                    
+                case .initial(_):
+                    self.tableView.reloadData()
+                case .update(_, _, _, _):
+                    self.tableView.reloadData()
+                case .error(_):
+                    print("error")
+                }
+            }
             self.groups = Array(groups)
         } catch {
             print(error)
